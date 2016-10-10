@@ -1,0 +1,91 @@
+.relative-position {
+    position: relative;
+}
+
+.absolute-position {
+    position: absolute;
+}
+
+.header {
+    background-color: #337ab7
+}
+
+.header-text {
+    background-color: #337ab7;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+}
+
+.header-icon {
+    background-color: #337ab7;
+    font-size: 15px;
+    color: white;
+    padding-top: 3px;
+}
+
+.footer{
+    background-color: #337ab7
+}
+
+.footer-text {
+    background-color: #337ab7;
+    color: white;
+}
+
+.body-icon {
+    font-size: 16px;
+    color: #337ab7;
+    padding-left: 10px;
+}
+
+input.form-control {
+    margin-bottom: 5px
+}
+
+body {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.glyphicon-inverse {
+    color: #fff
+}
+
+li {
+    padding-top: 3px;
+    color: #337ab7;
+}
+
+li.lineremove {
+    border-top: 0 none;
+    border-bottom: 0 none;
+    border-left: 0 none;
+    border-right: 0 none;
+}
+
+.v-divider{
+    width:1px;
+    background-color: black;
+    left: 33%;
+    position: absolute;
+    z-index: 5;
+    top:0;
+    bottom: 0;
+}
+
+.icon-list {
+    top: 0px;
+    right: 0px;
+    z-index: 10;
+    background-color: white;
+}
+
+.row-padding {
+    padding-left: 10px;
+}
+
+.rightpadding0 {
+    padding-right: 0px;
+}
+
