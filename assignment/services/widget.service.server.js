@@ -13,7 +13,7 @@ module.exports = function (app) {
     ];
 
     var multer = require('multer'); // npm install multer --save
-    var upload = multer({ dest: __dirname+'/../../public/assignment4/uploads'});
+    var upload = multer({ dest: __dirname+'/../../public/assignment/uploads'});
 
     app.post('/api/page/:pageId/widget', createWidget)
     app.get('/api/page/:pageId/widget', findAllWidgetsForPage);
@@ -42,10 +42,10 @@ module.exports = function (app) {
 
         for (var w in widgets) {
             if (widgets[w]._id === parseInt(widgetId)) {
-                widgets[w].url = "/assignment4/uploads/" + filename;
+                widgets[w].url = "/assignment/uploads/" + filename;
             }
         }
-        res.redirect("/assignment4/index.html#/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/");
+        res.redirect("/assignment/index.html#/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/");
     }
 
     function createWidget(req, res) {
