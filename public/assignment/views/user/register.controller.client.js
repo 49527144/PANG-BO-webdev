@@ -7,24 +7,25 @@
         var vm = this;
         vm.createUser = createUser;
 
-        function init() {
-            vm.users = UserService.allUsers();
-
-        }
-        init();
-
         function createUser(user) {
-            if(user.password != user.password2 || !user.password || !user.password2) {
-                return;
-            }
-            if(UserService.findUserByUsername(user.username) != null) {
-                return;
-            }
-            else{
-                user._id = (new Date()).getTime().toString();
-                UserService.createUser(user);
-                $location.url("/user/"+ user._id);
-            }
+            var promise = UserService.findUserByUsername(user.username);
+            promise
+                .success(function(user){
+                    if(user != '0') {
+                        vm.error = "Username already exist!!!";
+                    }
+                    else {
+                    UserService
+                        .createUser(user)
+                        .success(function (user) {
+                            $location.url("/user/" + user._id);
+
+                        })
+                        .error(function (error) {
+
+                        })
+                    }
+                });
         }
     }
 })();

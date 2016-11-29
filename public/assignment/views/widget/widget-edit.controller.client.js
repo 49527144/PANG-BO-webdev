@@ -1,20 +1,40 @@
-(function () {
+(function(){
     angular
         .module("WebAppMaker")
         .controller("WidgetEditController", WidgetEditController);
 
-    function WidgetEditController($routeParams, WidgetService, $sce, $location) {
+    function WidgetEditController($routeParams, WidgetService, $location) {
         var vm = this;
-        
-        vm.userId  = parseInt($routeParams['uid']);
-        vm.webId  = parseInt($routeParams['wid']);
-        vm.pageId  = parseInt($routeParams['pid']);
+
+        vm.userId = parseInt($routeParams['uid']);
+        vm.webId = parseInt($routeParams['wid']);
+        vm.pageId = parseInt($routeParams['pid']);
         vm.widgetId = parseInt($routeParams['wgid']);
         vm.updateWidget =updateWidget;
         vm.deleteWidget = deleteWidget;
 
+
         function init() {
-            vm.widget = WidgetService.findWidgetById(vm.widgetId);
+            var promise = WidgetService.findWidgetById(vm.widgetId);
+            promise
+                .success(function (widget) {
+                    if(widget != '0') {
+                        vm.widget = widget;
+                    }
+                })
+                .error(function () {
+
+                });
+
+            WidgetService
+                .findWidgetTypeById(vm.widgetId)
+                .success(function (wtype) {
+                    if(wtype != '0') {
+                        vm.wigtype = wtype;
+                    }
+                })
+                .error(function () {
+                });
         }
         init();
 

@@ -12,15 +12,31 @@
         vm.deleteWebsite = deleteWebsite;
 
         function init() {
-            vm.website = WebsiteService.findWebsiteById(websiteId);
-            vm.websites = WebsiteService.findWebsitesForUser(vm.userId);
+            var promise = WebsiteService.findWebsiteById(websiteId);
+            promise
+                .success(function (website) {
+                    if(website != '0') {
+                        vm.website = website;
+                    }
+                })
+                .error(function () {
+                });
 
+            WebsiteService
+                .findAllWebsitesForUser(vm.userId)
+                .success(function (websites) {
+                    if(websites != '[]') {
+                        vm.websites = websites;
+                    }
+                })
+                .error(function () {
+                });
         }
         init();
 
 
-        function updateWebsite(website) {
-            WebsiteService.updateWebsite(website);
+        function updateWebsite() {
+            WebsiteService.updateWebsite(vm.website);
             $location.url("/user/"+ vm.userId +"/website");
 
         }

@@ -8,23 +8,35 @@
 
         vm.userId = parseInt($routeParams['uid']);
 
-        var user = UserService.findUserById(vm.userId);
-        vm.users = UserService.allUsers();
         vm.updateUser = updateUser;
         vm.deleteUser = deleteUser;
 
-        if(user != null) {
-            vm.user = user;
+        function init() {
+            UserService
+                .findUserById(parseInt(vm.userId))
+                .success(function(user){
+                    if(user != '0') {
+                        vm.user = user;
+                    }
+                })
+                .error(function(){
+                });
+        }
+        init();
+
+        function updateUser() {
+            UserService.updateUser(vm.user);
         }
 
-        function updateUser(currentuser) {
-            currentuser = vm.user;
-            UserService.updateUser(user);
-            vm.success = "Updated the user";
-        }
+        function deleteUser() {
+            UserService
+                .deleteUser(vm.user._id)
+                .success(function(){
+                    $location.url("/login");
+                })
+                .error(function(){
 
-        function deleteUser(userId) {
-            UserService.deleteUser(userId);
+                });
         }
     }
 })();

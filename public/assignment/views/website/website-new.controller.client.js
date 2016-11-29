@@ -12,17 +12,39 @@
 
 
         function init() {
-            vm.websites = WebsiteService.findWebsitesForUser(vm.userId);
-            vm.website = WebsiteService.findWebsiteById(webId);
+            var promise = WebsiteService.findWebsiteById(vm.websiteId);
+            promise
+                .success(function (website) {
+                    if(website != '0') {
+                        vm.website = website;
+                    }
+                })
+                .error(function () {
+                });
+
+            WebsiteService
+                .findAllWebsitesForUser(vm.userId)
+                .success(function (websites) {
+                    if(websites != '[]') {
+                        vm.websites = websites;
+                    }
+                })
+                .error(function () {
+                });
         }
         init();
 
         function createWebsite(website) {
-            website._id = (new Date()).getTime();
             website.uid = vm.userId;
-            WebsiteService.createWebsite(website);
-            vm.websites= WebsiteService.findWebsitesForUser(vm.userId);
-            $location.url("/user/"+ vm.userId +"/website");
+
+            WebsiteService
+                .createWebsite(website)
+                .success(function (website) {
+                    $location.url("/user/"+ vm.userId +"/website");
+
+                })
+                .error(function () {
+                })
         }
     }
 })();

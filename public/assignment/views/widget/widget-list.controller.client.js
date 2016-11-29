@@ -13,7 +13,11 @@
         vm.checkSafeYouTubeUrl = checkSafeYouTubeUrl;
 
         function init() {
-            vm.widgets = WidgetService.findWidgetsByPageId(vm.pageId);
+            var promise = WidgetService.findWidgetsByPageId(vm.pageId);
+            promise
+                .then(function (response) {
+                    vm.widgets = response.data;
+                });
         }
         init();
 
@@ -22,11 +26,23 @@
         }
 
         function checkSafeYouTubeUrl(url) {
+            console.log(url);
             var parts = url.split('/');
             var id = parts[parts.length - 1];
             url = "https://www.youtube.com/embed/"+id;
             console.log(url);
             return $sce.trustAsResourceUrl(url);
+        }
+
+        function sortWidget(start, end) {
+            WidgetService
+                .sortWidget(vm.pageId, start, end)
+                .then(function (response) {
+                    vm.widgets = response.data;
+                }, function(error) {
+                    vm.error = error.data;
+                })
+
         }
     }
 })();

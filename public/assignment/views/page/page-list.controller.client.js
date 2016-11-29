@@ -10,7 +10,15 @@
         vm.webId = parseInt($routeParams['wid']);
 
         function init() {
-            vm.pages = PageService.findPageByWebsiteId(vm.webId);
+            var promise = PageService.findPageByWebsiteId(vm.webId);
+            promise
+                .success(function (pages) {
+                    if(pages != '[]') {
+                        vm.pages = pages;
+                    }
+                })
+                .error(function () {
+                });
         }
         init();        
     }
