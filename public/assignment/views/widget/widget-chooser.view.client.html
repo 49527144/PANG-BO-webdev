@@ -1,16 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Web</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="css/web.css"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-</head>
-<body>    
 <nav class="navbar navbar-fixed-top header">
     <span class="navbar-brand navbar-default header">
-    <a href="widget-list.html">
+    <a href="#/user/{{model.userId}}/website/{{model.webId}}/page/{{model.pageId}}/widget">
         <span class="glyphicon glyphicon-chevron-left pull-left header-icon"></span>
     </a>
     </span>
@@ -20,7 +10,7 @@
 <div class="container-fluid">
     <ul class="list-group">
         <li class="list-group-item lineremove">
-            <a href="widget-heading.html">Header</a>
+            <a ng-click="model.createWidget(model.pageId, {widgetType: 'HEADER'})">Header</a>
         </li>
         <li class="list-group-item lineremove">
             <a href="#">Label</a>
@@ -38,10 +28,10 @@
             <a href="#">Button</a>
         </li>
         <li class="list-group-item lineremove">
-            <a href="widget-image.html">Image</a>
+            <a ng-click="model.createWidget(model.pageId, {widgetType: 'IMAGE'})">Image</a>
         </li>
         <li class="list-group-item lineremove">
-            <a href="widget-youtube.html">YouTube</a>
+            <a ng-click="model.createWidget(model.pageId, {widgetType: 'YOUTUBE'})">YouTube</a>
         </li>
         <li class="list-group-item lineremove">
             <a href="#">Data Table</a>
@@ -55,12 +45,9 @@
 <footer class="navbar navbar-default navbar-fixed-bottom footer">
     <div class="container-fluid">
         <div class="navbar-text pull-right">
-            <a href="profile.html">
+            <a href="#/user/{{model.userId}}">
                 <span class="glyphicon glyphicon-user footer-text"></span>
             </a>
         </div>
     </div>
 </footer>
-
-</body>
-</html>

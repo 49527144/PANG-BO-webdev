@@ -1,23 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Web</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="css/web.css"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-</head>
-
-<body>
 <nav class="navbar navbar-fixed-top header">
     <span class="navbar-brand navbar-default header">
-        <a href="widget-list.html">
+        <a href="#/user/{{model.userId}}/website/{{model.webId}}/page/{{model.pageId}}/widget">
             <span class="glyphicon glyphicon-chevron-left pull-left header-icon"></span>
         </a>
     </span>
     <span class="navbar-brand header-text text-right">Widget Edit</span>
     <span class="navbar-brand navbar-default pull-right header">
-        <a href="widget-list.html">
+        <a class="navbar-link" ng-click="model.updateWidget(widget)">
             <span class="glyphicon glyphicon-ok header-icon"></span>
         </a>
     </span>
@@ -35,25 +24,22 @@
         </div>
         <div class="form-group">
             <label for="url">URL</label>
-            <input type="url" class="form-control" id="url" placeholder="https://www.youtube.com/embed/CC7wLhXBBaM">
+            <input ng-model="model.widget.url" type="url" class="form-control" id="url" placeholder="https://www.youtube.com/embed/CC7wLhXBBaM">
         </div>
         <div class="form-group">
             <label for="width">Width</label>
-            <input type="number" class="form-control" id="width" placeholder="Number">
+            <input ng-model="model.widget.width" type="number" class="form-control" id="width" placeholder="Number">
         </div>
-        <a class="btn btn-danger btn-block" href="page-list.html">Delete</a>
+        <a class="btn btn-danger btn-block" ng-click="model.deleteWidget(widget)">Delete</a>
     </form>
 </div>
 
 <footer class="navbar navbar-default navbar-fixed-bottom footer">
     <div class="container-fluid">
         <div class="navbar-text pull-right">
-            <a href="profile.html">
+            <a href="#/user/{{model.userId}}">
                 <span class="glyphicon glyphicon-user footer-text"></span>
             </a>
         </div>
     </div>
 </footer>
-
-</body>
-</html>
