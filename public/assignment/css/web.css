@@ -10,6 +10,14 @@
     background-color: #337ab7
 }
 
+.navbar-default .navbar-brand {
+    color: white;
+}
+
+.navbar-default .navbar-link {
+    color: white;
+}
+
 .header-text {
     background-color: #337ab7;
     font-size: 20px;
@@ -89,3 +97,13 @@ li.lineremove {
     padding-right: 0px;
 }
 
+.navbar-default {
+    background-color: #337ab7;
+}
+.navbar-fixed-bottom {
+    background-color: #145f84;
+}
+
+.contentPadding {
+    padding-top: 30px;
+}

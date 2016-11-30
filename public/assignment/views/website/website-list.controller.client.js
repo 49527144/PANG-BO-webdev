@@ -5,15 +5,14 @@
 
     function WebsiteListController($routeParams, WebsiteService) {
         var vm = this;
-
-        vm.userId = parseInt($routeParams['uid']);
+        vm.userId = $routeParams.uid;
 
         function init() {
-            var promise = WebsiteService.findAllWebsitesForUser(vm.userId)
-            promise
-                .success(function (websites) {
-                    if(websites != '[]') {
-                        vm.websites = websites;
+            WebsiteService
+                .findAllWebsitesForUser(vm.userId)
+                .success(function(temp) {
+                    if(temp != '[]') {
+                        vm.websites = temp;
                     }
                 })
                 .error(function () {

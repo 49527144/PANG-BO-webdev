@@ -1,28 +1,30 @@
-(function(){
+(function () {
     angular
         .module("WebAppMaker")
         .factory("WidgetService", WidgetService);
 
     function WidgetService($http) {
+
         var api = {
-            createWidget: createWidget,
-            findWidgetsByPageId: findWidgetsByPageId,
-            findWidgetById: findWidgetById,
-            updateWidget: updateWidget,
-            deleteWidget: deleteWidget,
-            findWidgetTypeById: findWidgetTypeById
-        };
+            createWidget:createWidget,
+            findWidgetbyId:findWidgetbyId,
+            findAllWidgetsForPage:findAllWidgetsForPage,
+            updateWidget:updateWidget,
+            deleteWidget:deleteWidget,
+            findWidgetTypeById:findWidgetTypeById,
+            selectFlickr:selectFlickr
+        }
         return api;
 
         function createWidget(widget) {
-            return $http.post('/api/page/' + widget.pageId + '/widget', widget);
+            return $http.post('/api/page/'+ widget.pageId + '/widget', widget);
         }
 
-        function findWidgetById(wid) {
-            return $http.get('/api/widget/'+ wid);
+        function findWidgetbyId(wid) {
+            return $http.get('/api/widget/' + wid);
         }
 
-        function findWidgetsByPageId(pid) {
+        function findAllWidgetsForPage(pid) {
             return $http.get('/api/page/' + pid + '/widget');
         }
 
@@ -30,13 +32,18 @@
             $http.put("/api/widget/" + widget._id, widget);
         }
 
-        function deleteWidget(widgetId) {
-            $http.delete("/api/widget/" + widgetId);
+        function deleteWidget(wgid) {
+            $http.delete("/api/widget/" + wgid);
         }
 
         function findWidgetTypeById(wid) {
-            var url = '/api/wigitype/'+wid;
-            return $http.get(url);
+            return $http.get('/api/wigitype/' + wid);
+        }
+
+        function selectFlickr(widgetId, photo) {
+            var content = {photo: photo};
+            return $http.put('/api/' + widgetId + '/flickr', content);
+
         }
     }
 })();

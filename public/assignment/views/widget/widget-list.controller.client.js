@@ -1,24 +1,26 @@
-(function () {
+(function(){
     angular
         .module("WebAppMaker")
-        .controller("WidgetListController", WidgetListController);
+        .controller("WidgeListController", WidgeListController);
 
-    function WidgetListController($routeParams, WidgetService, $sce) {
-        var vm  = this;
-        vm.userId  = parseInt($routeParams['uid']);
-        vm.webId  = parseInt($routeParams['wid']);
-        vm.pageId  = parseInt($routeParams['pid']);
-        vm.widgetId = parseInt($routeParams['wgid']);
+    function WidgeListController($routeParams, WidgetService, $sce) {
+        var vm = this;
+
+        vm.userId = $routeParams['uid'];
+        vm.websiteId = $routeParams['wid'];
+        vm.pageId = $routeParams['pid'];
+        vm.wgid = $routeParams['wgid'];
+        
         vm.checkSafeHtml = checkSafeHtml;
         vm.checkSafeYouTubeUrl = checkSafeYouTubeUrl;
 
         function init() {
-            var promise = WidgetService.findWidgetsByPageId(vm.pageId);
-            promise
-                .then(function (response) {
-                    vm.widgets = response.data;
-                });
-        }
+            WidgetService.findAllWidgetsForPage(vm.pageId)
+                .success(function (widgetList) {
+                    vm.widgets = widgetList;
+                })
+            $(".wam-widgets").sortable({ axis: 'y' });
+        };
         init();
 
         function checkSafeHtml(html) {
@@ -26,23 +28,11 @@
         }
 
         function checkSafeYouTubeUrl(url) {
-            console.log(url);
             var parts = url.split('/');
             var id = parts[parts.length - 1];
             url = "https://www.youtube.com/embed/"+id;
-            console.log(url);
             return $sce.trustAsResourceUrl(url);
         }
 
-        function sortWidget(start, end) {
-            WidgetService
-                .sortWidget(vm.pageId, start, end)
-                .then(function (response) {
-                    vm.widgets = response.data;
-                }, function(error) {
-                    vm.error = error.data;
-                })
-
-        }
     }
 })();

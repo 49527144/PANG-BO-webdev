@@ -1,25 +1,28 @@
-(function(){
+(function () {
     angular
         .module("WebAppMaker")
         .controller("ProfileController", ProfileController);
 
     function ProfileController($routeParams, UserService) {
         var vm = this;
-
-        vm.userId = parseInt($routeParams['uid']);
+        var userId = $routeParams['uid'];
 
         vm.updateUser = updateUser;
         vm.deleteUser = deleteUser;
 
         function init() {
             UserService
-                .findUserById(parseInt(vm.userId))
-                .success(function(user){
-                    if(user != '0') {
-                        vm.user = user;
+                .findUserById(userId)
+                .then(function(temp) {
+                    vm.user=temp.data;
+                })
+            UserService.allUsers()
+                .success(function(alluser) {
+                    if(alluser != '[]') {
+                        vm.users = alluser;
                     }
                 })
-                .error(function(){
+                .error(function () {
                 });
         }
         init();

@@ -5,28 +5,26 @@
 
     function WebsiteNewController($routeParams, WebsiteService, $location) {
         var vm = this;
+        var webId = $routeParams.wid;
+        vm.userId = $routeParams.uid;
 
-        vm.userId = parseInt($routeParams['uid']);
-        var webId = parseInt($routeParams['wid']);
         vm.createWebsite = createWebsite;
 
-
         function init() {
-            var promise = WebsiteService.findWebsiteById(vm.websiteId);
+            var promise = WebsiteService.findWebsiteById(webId);
             promise
-                .success(function (website) {
-                    if(website != '0') {
-                        vm.website = website;
+                .success(function(temp) {
+                    if(temp != '0') {
+                        vm.website = temp;
                     }
                 })
                 .error(function () {
                 });
-
             WebsiteService
                 .findAllWebsitesForUser(vm.userId)
-                .success(function (websites) {
-                    if(websites != '[]') {
-                        vm.websites = websites;
+                .success(function (allweb) {
+                    if(allweb != '[]') {
+                        vm.websites = allweb;
                     }
                 })
                 .error(function () {
@@ -41,9 +39,9 @@
                 .createWebsite(website)
                 .success(function (website) {
                     $location.url("/user/"+ vm.userId +"/website");
-
                 })
                 .error(function () {
+
                 })
         }
     }

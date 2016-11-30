@@ -7,9 +7,9 @@
         var vm = this;
 
 
-        vm.userId = parseInt($routeParams['uid']);
-        vm.webId = parseInt($routeParams['wid']);
-        vm.pageId = parseInt($routeParams['pid']);
+        vm.userId = $routeParams['uid'];
+        vm.webId = $routeParams['wid'];
+        vm.pageId = $routeParams['pid'];
         vm.findPageById = findPageById;
         vm.updatePage = updatePage;
         vm.deletePage =deletePage;
@@ -17,9 +17,9 @@
         function init() {
             var promise = PageService.findPageById(vm.pageId);
             promise
-                .success(function (page) {
-                    if(page != '0') {
-                        vm.page = page;
+                .success(function (temp) {
+                    if(temp != '0') {
+                        vm.page = temp;
                     }
                 })
                 .error(function () {

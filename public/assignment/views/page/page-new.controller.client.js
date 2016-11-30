@@ -6,8 +6,8 @@
     function PageNewController($routeParams, PageService, $location) {
         var vm = this;
 
-        vm.userId = parseInt($routeParams['uid']);
-        vm.webId = parseInt($routeParams['wid']);
+        vm.userId = $routeParams['uid'];
+        vm.webId = $routeParams['wid'];
         vm.createPage = createPage;
 
         function createPage(page) {
@@ -17,7 +17,6 @@
             promise
                 .success(function (page) {
                     $location.url("/user/" + vm.userId + "/website/" + vm.webId + "/page");
-
                 })
                 .error(function () {
                 })

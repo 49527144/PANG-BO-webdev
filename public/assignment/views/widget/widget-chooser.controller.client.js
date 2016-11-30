@@ -1,42 +1,38 @@
-(function () {
+(function(){
     angular
         .module("WebAppMaker")
-        .controller("WidgetChooserController", WidgetChooserController);
+        .controller("WidgeChooserController", WidgeChooserController);
 
-    function WidgetChooserController($routeParams, WidgetService,$location) {
+    function WidgeChooserController($routeParams, WidgetService, $location) {
         var vm = this;
 
-        vm.userId = parseInt($routeParams['uid']);
-        vm.webId = parseInt($routeParams['wid']);
-        vm.pageId = parseInt($routeParams['pid']);
-        vm.widgetId = parseInt($routeParams['wgid']);
+        vm.userId = $routeParams['uid'];
+        vm.websiteId = $routeParams['wid'];
+        vm.pageId = $routeParams['pid'];
+        vm.wigetId = $routeParams['wgid'];
 
         vm.createWidget = createWidget;
 
-
-        function init() {
-            var promise = WidgetService.findWidgetById(vm.widgetId);
+        function inti() {
+            var promise = WidgetService.findWidgetbyId(vm.wigetId);
             promise
-                .success(function (widget) {
-                    if(widget != '0') {
-                        vm.widget = widget;
+                .success(function (temp) {
+                    if(temp != '0') {
+                        vm.widget = temp;
                     }
                 })
                 .error(function () {
-
                 });
         }
-        init();
+        inti();
 
-        function createWidget(pid, type) {
-            console.log("checkpoint");
-            widget = {};
+        function createWidget(pid, widget) {
             widget.pageId = pid;
-            widget.widgetType = type;
             WidgetService
                 .createWidget(widget)
                 .success(function (widget) {
                     $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + widget._id);
+
                 })
                 .error(function () {
 

@@ -12,7 +12,7 @@
             promise
                 .success(function(user){
                     if(user === '0') {
-                        vm.error = "No such user";
+                        vm.error = "User not exist";
                     } else {
                         $location.url("/user/" + user._id);
                     }

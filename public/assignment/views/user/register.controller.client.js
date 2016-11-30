@@ -8,10 +8,15 @@
         vm.createUser = createUser;
 
         function createUser(user) {
+            if(user.password != user.password2 || 
+                !user.password || !user.password2) {
+                vm.error = "Please enter the same password";
+                return;
+            }
             var promise = UserService.findUserByUsername(user.username);
             promise
-                .success(function(user){
-                    if(user != '0') {
+                .success(function(temp){
+                    if(temp != '0') {
                         vm.error = "Username already exist!!!";
                     }
                     else {
