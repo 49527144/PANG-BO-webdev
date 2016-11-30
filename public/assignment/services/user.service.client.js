@@ -28,13 +28,7 @@
         }
 
         function findUserByUsername(username) {
-            for (var u in users) {
-                user = users[u];
-                if (user.username === username) {
-                    return user;
-                }
-            }
-            return null;
+            return $http.get('/api/user?username=' + username);
         }
 
         function findUserByCredentials(username, password) {
