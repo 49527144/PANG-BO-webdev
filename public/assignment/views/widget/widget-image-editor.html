@@ -1,43 +1,60 @@
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-        <p class="navbar-text pull-right">
-            <a ng-click="model.updateWidget(widget)" class="navbar-link">
-                <span class="glyphicon glyphicon-ok"></span>
-            </a>
-        </p>
-        <p class="navbar-text pull-left">
-            <a class="navbar-link" href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
-                <span class="glyphicon glyphicon-chevron-left"></span>
-            </a>
-        </p>
-        <div class="navbar-header">
-            <a class="navbar-brand">Image Edit</a>
-        </div>
-    </div>
+<nav class="navbar navbar-fixed-top header">
+    <span class="navbar-brand navbar-default header">
+        <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
+            <span class="glyphicon glyphicon-chevron-left pull-left header-icon"></span>
+        </a>
+    </span>
+    <span class="navbar-brand header-text text-right">Imgae Edit</span>
+    <span class="navbar-brand navbar-default pull-right header">
+        <a class="navbar-link" ng-click="model.updateWidget(widget)">
+            <span class="glyphicon glyphicon-ok header-icon"></span>
+        </a>
+    </span>
 </nav>
 
-<div class="container-fluid contentPadding">
+<div class="container-fluid">
+        <div ng-show="model.error" class="alert alert-danger" role="alert">
+        {{model.error}}
+    </div>
     <form>
         <div class="form-group">
-            <label>URL</label>
-            <input ng-model="model.widget.url" class="form-control"/>
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Widget-Heading">
+        </div>
+        <div class="form-group">
+            <label for="text">Text</label>
+            <input type="text" class="form-control" id="text" placeholder="Widget-Text">
+        </div>
+        <div class="form-group">
+            <label for="url">URL</label>
+            <input ng-model="model.widget.url" type="url" class="form-control" id="url" placeholder="https://i.ytimg.com/vi/sGRXIAh41IA/maxresdefault.jpg">
         </div>
         <div class="form-group">
             <label for="width">Width</label>
-            <input ng-model="model.widget.width" type="number" class="form-control" id="width" value="100%">
+            <input ng-model="model.widget.width" type="number" class="form-control" id="width" placeholder="Number">
         </div>
     </form>
 
-    <form action="/api/upload" method="post" enctype="multipart/form-data">
+    <label for="width">Upload</label>
+    <form action="/api/upload"  method="post" enctype="multipart/form-data">
         <input  name="myFile"   type="file" class="form-control"/>
-        <input  name="widgetId" value="{{model.widget._id}}" style="display: none"/>
         <input  name="userId"   value="{{model.userId}}" style="display: none"/>
-        <input  name="websiteId"   value="{{model.websiteId}}" style="display: none"/>
+        <input  name="websiteId"   value="{{model.webId}}" style="display: none"/>
         <input  name="pageId"   value="{{model.pageId}}" style="display: none"/>
+        <input  name="width"    value="{{model.widget.width}}" style="display: none"/>
+        <input  name="widgetId" value="{{model.widget._id}}"   style="display: none"/>
         <button type="submit"   class="btn btn-block btn-primary">Upload Image</button>
     </form>
 
-    <a class="btn btn-warning btn-block" href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{model.widget._id}}/flicker">Search Photo</a>
-
-    <a ng-click="model.deleteWidget(widget)" class="btn btn-danger btn-block">Delete</a>
+    <a class="btn btn-danger btn-block" ng-click="model.deleteWidget(widget)">Delete</a>
 </div>
+
+<footer class="navbar navbar-default navbar-fixed-bottom footer">
+    <div class="container-fluid">
+        <div class="navbar-text pull-right">
+            <a href="#/user/{{model.userId}}">
+                <span class="glyphicon glyphicon-user footer-text"></span>
+            </a>
+        </div>
+    </div>
+</footer>

@@ -30,6 +30,9 @@
     </div>
 </nav>
 
+
+
+
 <div>
 <div class="col-sm-4 hidden-xs">
 <div class="container-fluid">
@@ -52,6 +55,9 @@
 
 <div class="col-sm-8">
     <div class="container-fluid">
+        <div ng-show="model.error" class="alert alert-danger" role="alert">
+            {{model.error}}
+        </div>
         <form>
             <div class="form-group">
                 <label for="name">Name</label>

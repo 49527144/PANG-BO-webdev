@@ -11,9 +11,16 @@
             findUserByCredentials: findUserByCredentials,
             updateUser: updateUser,
             deleteUser: deleteUser,
-            allUsers: allUsers
+            login: login,
+            logout: logout,
+            register: register,
+            findcurrentUser: findcurrentUser
         };
         return api;
+
+        function findcurrentUser() {
+            return $http.get('/api/user');
+        }
 
         function createUser(user) {
             var newuser = {
@@ -36,15 +43,26 @@
         }
 
         function updateUser(user) {
-            $http.put("/api/user/" + user._id);
+            $http.put("/api/user/" + user._id, user);
         }
 
         function deleteUser(userId) {
             $http.delete("/api/user/" + userId);
         }
 
-        function allUsers() {
-            return $http.get('/api/users/alluser');
+        function login(user) {
+            console.log("step");
+            return $http.post("/api/login", user);
         }
+
+        function logout() {
+            return $http.post("/api/logout");
+        }
+
+        function register(user) {
+            // console.log("111");
+            return $http.post('/api/register', user);
+        }
+
     }
 })();

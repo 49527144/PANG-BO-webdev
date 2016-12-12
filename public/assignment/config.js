@@ -1,10 +1,23 @@
-/**
- * Created by Haonan on 10/12/2016.
- */
 (function() {
     angular
         .module("WebAppMaker")
-        .config(Config);        //configure the module
+        .config(Config);
+
+        var checkLoggedin = function($q, $timeout, $http, $location, $rootScope) {
+            var deferred = $q.defer();
+            $http.get('/api/loggedin').success(function(user) {
+                $rootScope.errorMessage = null;
+                if (user !== '0') {
+                    $rootScope.currentUser = user;
+                    deferred.resolve();
+                } else {
+                    deferred.reject();
+                    $location.url('/');
+                }
+            });
+            return deferred.promise;
+        };
+
     function Config($routeProvider) {
         $routeProvider
             .when("/login", {
@@ -17,19 +30,18 @@
                 controller:"RegisterController",
                 controllerAs: "model",
             })
+            .when("/user", {
+                templateUrl: "views/user/profile.view.client.html",
+                controller:"ProfileController",
+                controllerAs:"model",
+                resolve: { loggedin: checkLoggedin }
+            })
             .when("/user/:uid", {
                 templateUrl: "views/user/profile.view.client.html",
                 controller:"ProfileController",
-                controllerAs:"model"
+                controllerAs:"model",
+                resolve: { loggedin: checkLoggedin }
             })
-
-            .when("/user/:uid/database", {
-                templateUrl: "views/user/database.html",
-                controller:"ProfileController",
-                controllerAs:"model"
-            })
-
-
             .when("/user/:uid/website", {
                 templateUrl: "views/website/website-list.view.client.html",
                 controller: "WebsiteListController",
@@ -46,48 +58,36 @@
                 controller: "WebsiteEditController",
                 controllerAs: "model"
             })
-
-
             .when("/user/:uid/website/:wid/page", {
                 templateUrl: "views/page/page-list.view.client.html",
                 controller: "PageListController",
                 controllerAs: "model"
             })
-
-
-
             .when("/user/:uid/website/:wid/page/new", {
                 templateUrl: "views/page/page-new.view.client.html",
                 controller: "PageNewController",
                 controllerAs: "model"
             })
-
-
             .when("/user/:uid/website/:wid/page/:pid", {
                 templateUrl: "views/page/page-edit.view.client.html",
                 controller: "PageEditController",
                 controllerAs: "model"
             })
-
-
             .when("/user/:uid/website/:wid/page/:pid/widget", {
                 templateUrl: "views/widget/widget-list.view.client.html",
                 controller: "WidgeListController",
                 controllerAs: "model"
             })
-
             .when("/user/:uid/website/:wid/page/:pid/widget/new", {
                 templateUrl: "views/widget/widget-chooser.view.client.html",
                 controller: "WidgeChooserController",
                 controllerAs: "model"
             })
-
             .when("/user/:uid/website/:wid/page/:pid/widget/:wgid", {
                 templateUrl: "views/widget/widget-edit.view.client.html",
                 controller: "WidgeEditController",
                 controllerAs: "model"
             })
-
             .when("/user/:uid/website/:wid/page/:pid/widget/:wgid/flicker", {
                 templateUrl: 'views/widget/widget-flickr-search.view.client.html',
                 controller:'FlickrController',

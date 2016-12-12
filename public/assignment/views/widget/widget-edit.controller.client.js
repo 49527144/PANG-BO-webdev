@@ -28,6 +28,12 @@
         init();
 
         function updateWidget(currentwidget) {
+
+            // if(!currentwidget.name) {
+            //     vm.error = ("widget name cannot be empty");
+            //     return;
+            // }
+
             currentwidget = vm.widget;
             var updated = WidgetService.updateWidget(currentwidget);
             $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");

@@ -27,6 +27,13 @@
         inti();
 
         function createWidget(pid, widget) {
+
+            // if(!widget || !widget.name) {
+            //     vm.error = ("Widget name cannot be empty");
+            //     return;
+            // }
+
+
             widget.pageId = pid;
             WidgetService
                 .createWidget(widget)

@@ -11,6 +11,13 @@
         vm.createPage = createPage;
 
         function createPage(page) {
+
+            if(!page || !page.name) {
+                vm.error = ("Page title cannot be empty");
+                return;
+            }
+
+
             page.websiteId = vm.webId;
 
             var promise = PageService.createPage(page);

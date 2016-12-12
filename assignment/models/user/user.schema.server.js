@@ -9,7 +9,11 @@ module.exports = function () {
         lastname: String,
         email: String,
         phone: String,
-        websites: [WebsiteSchema]
+        websites: [WebsiteSchema],
+        facebook: {
+            id:    String,
+            token: String
+        }
     }, {collection: "user"});
     return UserSchema;
 }

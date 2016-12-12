@@ -33,6 +33,12 @@
         init();
 
         function createWebsite(website) {
+
+            if(!website || !website.name) {
+                vm.error = ("website name cannot be empty");
+                return;
+            }
+
             website.uid = vm.userId;
 
             WebsiteService

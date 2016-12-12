@@ -33,6 +33,12 @@
         init();
 
         function updateWebsite() {
+
+            if (!vm.website.name) {
+                vm.error = ("Website name cannot be empty");
+                return;
+            }
+
             WebsiteService.updateWebsite(vm.website);
             $location.url("/user/"+ vm.userId +"/website");
 

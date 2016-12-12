@@ -32,6 +32,12 @@
         }
 
         function updatePage(page) {
+
+            if(!page.name) {
+                vm.error = ("Page title cannot be empty");
+                return;
+            }
+
             PageService.updatePage(page);
             $location.url("/user/"+vm.userId+"/website/"+vm.webId+"/page");
         }

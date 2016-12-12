@@ -1,19 +1,15 @@
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-        <p class="navbar-text pull-right">
-            <a ng-click="model.updateWidget()" class="navbar-link">
-                <span class="glyphicon glyphicon-ok"></span>
+<nav class="navbar navbar-fixed-top header">
+        <span class="navbar-brand navbar-default header">
+        <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
+            <span class="glyphicon glyphicon-chevron-left pull-left header-icon"></span>
+        </a>
+        </span>
+    <span class="navbar-brand header-text text-right">Flicker Edit</span>
+    <span class="navbar-brand navbar-default pull-right header">
+            <a ng-click="model.updateWidget(widget)">
+                <span class="glyphicon glyphicon-ok header-icon"></span>
             </a>
-        </p>
-        <p class="navbar-text pull-left">
-            <a class="navbar-link" href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
-                <span class="glyphicon glyphicon-chevron-left"></span>
-            </a>
-        </p>
-        <div class="navbar-header">
-            <a class="navbar-brand">Widget Image Edit</a>
-        </div>
-    </div>
+        </span>
 </nav>
 
 <div class="container-fluid contentPadding">
@@ -35,11 +31,11 @@
         </form>
 </div>
 
-<footer class="navbar navbar-default navbar-fixed-bottom">
+<footer class="navbar navbar-default navbar-fixed-bottom footer">
     <div class="container-fluid">
         <div class="navbar-text pull-right">
-            <a class="navbar-link" href="#/user/{{model.userId}}">
-                <span class="glyphicon glyphicon-user"></span>
+            <a href="#/user/{{model.userId}}">
+                <span class="glyphicon glyphicon-user footer-text"></span>
             </a>
         </div>
     </div>
