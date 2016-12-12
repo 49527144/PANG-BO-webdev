@@ -1,3 +1,12 @@
+
+
+.home-text {
+    background-color: orange;
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+}
+
 .relative-position {
     position: relative;
 }
@@ -100,10 +109,26 @@ li.lineremove {
 .navbar-default {
     background-color: #337ab7;
 }
+
 .navbar-fixed-bottom {
     background-color: #145f84;
 }
 
 .contentPadding {
     padding-top: 30px;
+}
+
+.homeheader {
+    background-color: orange;
+}
+
+.sansserif {
+    top: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #d3d3d3;
+}
+
+
+.grey {
+    background-color: #d3d3d3;
 }
